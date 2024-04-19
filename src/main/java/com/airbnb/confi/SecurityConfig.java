@@ -18,9 +18,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf().disable().cors().disable();
         http.addFilterBefore(jwtRequestFilter, AuthorizationFilter.class);
-        http.authorizeHttpRequests().
-                requestMatchers("/api/v1/users/addUser","/api/v1/users/login").
-                permitAll().anyRequest().authenticated(); //haap
+        http.authorizeHttpRequests().anyRequest().permitAll();
+//                requestMatchers("/api/v1/users/addUser","/api/v1/users/login")
+//                .permitAll()
+//                .requestMatchers("/api/v1/countries/addCountry").hasRole("ADMIN")
+//                .requestMatchers("/api/v1/users/profile").hasAnyRole("ADMIN","USER")
+//                .anyRequest().authenticated(); //haap
+
         return http.build();
     }
 
